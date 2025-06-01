@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Boomerang - New Tab</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: #e6ecf0;
+    }
+    .main-layout {
+      display: flex;
+      max-width: 1000px;
+      margin: 40px auto;
+      min-height: 80vh;
+    }
+    .sidebar {
+      width: 240px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      margin-right: 32px;
+      padding: 32px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      min-height: 500px;
+    }
+    .sidebar-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .sidebar-logo {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 8px;
+    }
+    .sidebar-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1da1f2;
+      margin-bottom: 2px;
+      letter-spacing: -1px;
+    }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 32px;
+      padding: 0 24px;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      color: #14171a;
+      text-decoration: none;
+      padding: 10px 12px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+    .sidebar-link.active, .sidebar-link:hover {
+      background: #e8f5fd;
+      color: #1da1f2;
+    }
+    .sidebar-section {
+      padding: 0 24px 24px 24px;
+      border-top: 1px solid #e1e8ed;
+    }
+    .sidebar-section-title {
+      font-size: 14px;
+      color: #657786;
+      font-weight: 600;
+      margin: 18px 0 8px 0;
+    }
+    .sidebar-profile {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .sidebar-profile-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #f5f8fa;
+      border: 1px solid #e1e8ed;
+      object-fit: cover;
+    }
+    .sidebar-profile-info {
+      flex: 1;
+    }
+    .sidebar-profile-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #14171a;
+    }
+    .sidebar-profile-meta {
+      font-size: 13px;
+      color: #657786;
+    }
+    .sidebar-stats {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #657786;
+      line-height: 1.6;
+    }
+    .container {
+      flex: 1;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 0 0 24px 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      text-align: center;
+      padding: 32px 0 16px 0;
+      border-bottom: 1px solid #e1e8ed;
+    }
+    .logo {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 8px;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1da1f2;
+      margin-bottom: 4px;
+      letter-spacing: -1px;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #657786;
+    }
+    .feed {
+      margin-top: 0;
+    }
+    .tweet-card {
+      display: flex;
+      align-items: flex-start;
+      border-bottom: 1px solid #e1e8ed;
+      padding: 20px 24px 16px 24px;
+      background: #fff;
+      transition: background 0.2s;
+    }
+    .tweet-card:last-child {
+      border-bottom: none;
+    }
+    .tweet-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin-right: 16px;
+      object-fit: cover;
+      background: #f5f8fa;
+      border: 1px solid #e1e8ed;
+    }
+    .tweet-main {
+      flex: 1;
+      min-width: 0;
+    }
+    .tweet-hero {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin: 12px 0 8px 0;
+      background: #f5f8fa;
+      border: 1px solid #e1e8ed;
+      display: block;
+    }
+    .tweet-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #14171a;
+      margin-bottom: 2px;
+      text-decoration: none;
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .tweet-content {
+      font-size: 15px;
+      color: #14171a;
+      margin-bottom: 8px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .tweet-meta {
+      font-size: 13px;
+      color: #657786;
+      margin-bottom: 4px;
+    }
+    .tweet-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 4px;
+    }
+    .tweet-action {
+      background: none;
+      border: none;
+      color: #657786;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 50%;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tweet-action.liked svg {
+      stroke: #e0245e;
+      fill: #e0245e;
+    }
+    .tweet-action:hover {
+      background: #e8f5fd;
+    }
+    .tweet-action svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
+    .tweet-readmore {
+      color: #1da1f2;
+      text-decoration: none;
+      font-weight: 500;
+      margin-left: 4px;
+      font-size: 15px;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 48px 0;
+      color: #657786;
+    }
+    .empty-state-icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 16px;
+    }
+    .empty-state-text {
+      font-size: 20px;
+      color: #14171a;
+      margin-bottom: 8px;
+    }
+    .empty-state-subtext {
+      color: #657786;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="icons/icon-64.png" alt="Boomerang" class="sidebar-logo">
+        <div class="sidebar-title">Boomerang</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="sidebar-link active" id="nav-feed">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6"/></svg>
+          Feed
+        </a>
+        <a class="sidebar-link" id="nav-archived">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z"/></svg>
+          Archived
+        </a>
+        <a class="sidebar-link" id="nav-notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+          Notifications
+        </a>
+      </nav>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Profile</div>
+        <div class="sidebar-profile">
+          <img src="icons/icon-48.png" alt="Profile" class="sidebar-profile-avatar">
+          <div class="sidebar-profile-info">
+            <div class="sidebar-profile-name" id="profileName">User</div>
+          </div>
+        </div>
+        <div class="sidebar-stats" id="profileStats">
+          <!-- Stats will be rendered here -->
+        </div>
+      </div>
+    </aside>
+    <div class="container">
+      <div class="header">
+        <img src="icons/icon-64.png" alt="Boomerang" class="logo">
+        <h1 class="title">Boomerang</h1>
+        <p class="subtitle">Your throws are returning</p>
+      </div>
+      <div class="feed" id="bookmarkFeed">
+        <!-- Bookmarks will be inserted here -->
+      </div>
+    </div>
+  </div>
+  <script src="browser-polyfill.js"></script>
+  <script src="newtab.js"></script>
+</body>
+</html> 

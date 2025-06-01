@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64 8 L120 64 L64 120 L8 64 Z" 
+        fill="none" 
+        stroke="#FF6B35" 
+        stroke-width="8" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        transform="rotate(45 64 64)"/>
+</svg> 

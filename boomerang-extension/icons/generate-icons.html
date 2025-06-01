@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generate Boomerang Icons</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      margin: 10px;
+    }
+    .instructions {
+      max-width: 600px;
+      margin: 20px;
+      padding: 20px;
+      background: #f5f5f5;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Boomerang Icon Generator</h1>
+  <div class="instructions">
+    <h2>Instructions:</h2>
+    <ol>
+      <li>Right-click each canvas below</li>
+      <li>Select "Save image as..."</li>
+      <li>Save with the correct filename (icon-16.png, icon-48.png, icon-64.png, icon-128.png)</li>
+      <li>Place all saved files in the icons directory</li>
+    </ol>
+  </div>
+  
+  <div>
+    <h3>16x16</h3>
+    <canvas id="icon16" width="16" height="16"></canvas>
+  </div>
+  
+  <div>
+    <h3>48x48</h3>
+    <canvas id="icon48" width="48" height="48"></canvas>
+  </div>
+  
+  <div>
+    <h3>64x64</h3>
+    <canvas id="icon64" width="64" height="64"></canvas>
+  </div>
+  
+  <div>
+    <h3>128x128</h3>
+    <canvas id="icon128" width="128" height="128"></canvas>
+  </div>
+
+  <script>
+    function drawBoomerang(canvas, size) {
+      const ctx = canvas.getContext('2d');
+      const padding = size * 0.1;
+      const center = size / 2;
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, size, size);
+      
+      // Draw boomerang
+      ctx.beginPath();
+      ctx.strokeStyle = '#FF6B35';
+      ctx.lineWidth = size * 0.1;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      
+      // Draw diamond shape
+      ctx.moveTo(center, padding);
+      ctx.lineTo(size - padding, center);
+      ctx.lineTo(center, size - padding);
+      ctx.lineTo(padding, center);
+      ctx.closePath();
+      
+      ctx.stroke();
+    }
+
+    // Draw icons
+    drawBoomerang(document.getElementById('icon16'), 16);
+    drawBoomerang(document.getElementById('icon48'), 48);
+    drawBoomerang(document.getElementById('icon64'), 64);
+    drawBoomerang(document.getElementById('icon128'), 128);
+  </script>
+</body>
+</html> 
